@@ -3,18 +3,14 @@ const router = express.Router();
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient()
  
-router.get('/:take:skip', async function(req, res, next) {
+router.get('/:take/:skip', async function(req, res, next) {
+    console.log(req.params.take)
     const movies = await prisma.movies.findMany({
-        skip:10,
-        take: 10
+        skip: req.params.skip,
+        take: req.params.take
         })
   res.send({
-      data: movies,
-      pagination : {
-          count : total, // Total des enregistrements
-          take: limit,   // Nombre d'éléments sélectionnés
-          skip: offset   // Décalage à partir duquel on prend les  données
-      }
+    movies,
   });
 
 });
