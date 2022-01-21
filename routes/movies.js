@@ -3,7 +3,8 @@ var router = express.Router();
 
 /* GET movies listing. */
 router.get("/", function (req, res, next) {
-  res.send("here are all the informations about movies");
+  var movies = require("../movies_reduit.json");
+  res.send(movies);
 });
 
 module.exports = router;
